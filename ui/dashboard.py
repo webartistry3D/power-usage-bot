@@ -122,7 +122,12 @@ def load_or_create_dataframe(path):
                 "units_end": 0.0,
                 "usage": 0.0
             }])
-        df["date"] = pd.to_datetime(df["date"], errors="coerce").fillna(pd.Timestamp(datetime.date.today()))
+        df["date"] = pd.to_datetime(
+            df["date"],
+            format="%Y-%m-%d %H:%M:%S",
+            errors="coerce"
+        ).fillna(pd.Timestamp(datetime.date.today()))
+
         return df
 
 df = load_or_create_dataframe(DATA_PATH)
@@ -232,9 +237,18 @@ if "manual_update" not in st.session_state:
     st.session_state.manual_update = False
 
 with st.form("manual_entry", clear_on_submit=True):
-    units_start = st.number_input("Units at Start of Day", min_value=0.0, step=0.1)
-    units_end = st.number_input("Units at End of Day", min_value=0.0, step=0.1)
+    units_start = st.text_input("Units at Start of Day", placeholder="e.g. 300")
+    units_end = st.text_input("Units at End of Day", placeholder="e.g. 290")
     submitted = st.form_submit_button("Add Entry")
+
+    # Convert safely to float
+    try:
+        units_start = float(units_start)
+        units_end = float(units_end)
+    except ValueError:
+        st.stop()  # Wait until user enters valid numbers
+    
+    import time
 
     if submitted:
         if units_start > units_end:
@@ -258,7 +272,9 @@ with st.form("manual_entry", clear_on_submit=True):
 
             # Temporary success message
             msg_placeholder = st.empty()
-            msg_placeholder.success(f"✅ Added: {usage} units used today.")
+            msg_placeholder.success(f"✅ Added")
+            time.sleep(3)
+            msg_placeholder.empty()
         else:
             st.error("⚠️ 'Units at Start' must be greater than 'Units at End'.")
 
