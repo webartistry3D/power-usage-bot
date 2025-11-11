@@ -96,7 +96,7 @@ st.markdown(
 st.markdown('<div style="display:flex;align-items:center;gap:18px;">'
             '<div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#00e6ff,#ff00d0);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(255,0,208,0.08);">'
             '<span style="font-weight:800;color:#05030a;">⚡</span></div>'
-            f'<div><div class="neon-title">PowerUsage — Neon</div><div class="subtle">Smart prepaid meter monitoring · predictions · alerts</div></div></div>',
+            f'<div><div class="neon-title">PowerUsage</div><div class="subtle">Smart prepaid meter monitoring · predictions · alerts</div></div></div>',
             unsafe_allow_html=True)
 
 st.write("")  # spacing
@@ -169,14 +169,14 @@ with c2:
     st.markdown('<div class="card">'
                 '<div style="font-size:12px;color:#9fbcd6">AVG DAILY USAGE</div>'
                 f'<div style="font-size:22px;font-weight:800;margin-top:8px;">{avg_usage:.2f} <span style="font-size:12px;color:#9fbcd6">units/day</span></div>'
-                '<div class="help-box">Average of recent usage — used to estimate days left.</div>'
+                #'<div class="help-box">Average of recent usage — used to estimate days left.</div>'
                 '</div>', unsafe_allow_html=True)
 
 with c3:
     st.markdown('<div class="card">'
                 '<div style="font-size:12px;color:#9fbcd6">ESTIMATED DAYS LEFT</div>'
                 f'<div style="font-size:22px;font-weight:800;margin-top:8px;">{days_left:.1f} <span style="font-size:12px;color:#9fbcd6">days</span></div>'
-                '<div class="help-box">Balance ÷ Avg daily usage</div>'
+                #'<div class="help-box">Balance ÷ Avg daily usage</div>'
                 '</div>', unsafe_allow_html=True)
 
 with c4:
@@ -184,7 +184,7 @@ with c4:
                 '<div style="font-size:12px;color:#9fbcd6">SYSTEM</div>'
                 '<div style="font-size:20px;font-weight:800;margin-top:6px;color:#ff00d0">ONLINE</div>'
                 '<div style="font-size:11px;color:#9fbcd6;margin-top:6px">Last sync</div>'
-                f'<div style="font-size:12px;color:#9fbcd6">{pd.Timestamp.now().strftime("%Y-%m-%d %H:%M")}</div>'
+                f'<div style="font-size:12px;color:#9fbcd6">{pd.Timestamp.now().strftime("%Y-%m-%d %H:%M")} HRS</div>'
                 '</div>', unsafe_allow_html=True)
 
 st.write("")  # spacing
@@ -219,7 +219,7 @@ with right_col:
         "usage": "Usage"
     }))
 
-    st.markdown('<div style="margin-top:10px;" class="muted">Tip: Click "Add Meter Reading" to append today\'s usage.</div>', unsafe_allow_html=True)
+    st.markdown('<div style="margin-top:10px;" class="muted">Click "Add Meter Reading" to append today\'s usage.</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.write("")  # spacing
